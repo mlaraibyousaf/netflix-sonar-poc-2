@@ -19,11 +19,11 @@ jobs:
           SONAR_DEFAULT_BRANCH: main
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          id: project_key
+          id: setupSonar
           
       - name: extract project-key
         shell: bash
-        run : echo "${{ steps.project_key.outputs.SONAR_PROJECT_KEY }}"
+        run : echo "${{steps.setupSonar.outputs.SONAR_ORGANIZATION}}"
                 
 
       # - name: SonarCloud Scan

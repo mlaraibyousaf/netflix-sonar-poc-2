@@ -6,6 +6,10 @@ jobs:
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+     
       - name: create-sonar-project
         uses: nelsoncanarinho/setup-sonar-action@v1.0.0
         with:
@@ -15,12 +19,15 @@ jobs:
           SONAR_DEFAULT_BRANCH: main
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          id: project_key
+          
+      - name: extract project-key
+        shell: bash
+        run : echo "${{ steps.project_key.outputs.SONAR_PROJECT_KEY }}"
                 
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

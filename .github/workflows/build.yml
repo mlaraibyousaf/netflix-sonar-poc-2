@@ -22,9 +22,11 @@ jobs:
          # NEW_CODE_DEFINITION_VALUE="previous_version"
         
          # List of project names and keys
-         PROJECTS=${{ vars.PROJECT_NAME }}
+         # PROJECTS=${{ vars.PROJECT_NAME }}
+         PROJECTS= ("test-react45" "test-sonar46")
+         PROJECT_KEYS= ("lbf_test-react45" "lbf_test-sonar46")
          echo $PROJECTS
-         PROJECT_KEYS=${{ vars.PROJECT_NAME }}
+         # PROJECT_KEYS=${{ vars.PROJECT_NAME }}
          echo $PROJECTS_KEYS
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"

@@ -19,7 +19,7 @@ jobs:
          echo $ORGANIZATION
          # VISIBILITY="public"
          NEW_CODE_DEFINITION_TYPE="previous_version"
-         NEW_CODE_DEFINITION_VALUE="previous_version"
+         # NEW_CODE_DEFINITION_VALUE="previous_version"
         
          # List of project names and keys
          PROJECTS=${{ vars.PROJECT_NAME }}

@@ -32,7 +32,7 @@ jobs:
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
              PROJECT_KEY="$ORGANIZATION"_"$PROJECT_NAME"
-        
+             echo "Creating project: $PROJECT_NAME with key: $PROJECT_KEY"
              curl --include \
                   --request POST \
                   -u "$SONAR_TOKEN:" \

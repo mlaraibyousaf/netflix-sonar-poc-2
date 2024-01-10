@@ -3,7 +3,7 @@ on:
   workflow_dispatch: 
     inputs:
       project_names:
-        description: 'Enter colors (e.g., "Proj1 Proj2 Proj3")'
+        description: 'Enter project names as a space-separated list e.g proj1 proj2 proj3'
         required: true
 jobs:
   sonarcloud:

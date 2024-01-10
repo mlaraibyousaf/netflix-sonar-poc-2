@@ -21,11 +21,11 @@ jobs:
         
          # List of project names and keys
          PROJECTS=${{ vars.PROJECT_NAME }}
-         PROJECT_KEYS=${{ vars.PROJECT_KEYS }}
+         # PROJECT_KEYS="${{ vars.PROJECT_NAME }}"
         
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
-             PROJECT_KEY="${PROJECT_KEYS[$i]}"
+             PROJECT_KEY="$ORGANIZATION_${PROJECT_KEYS[$i]}"
         
              curl --include \
                   --request POST \

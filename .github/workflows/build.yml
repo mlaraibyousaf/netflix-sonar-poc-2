@@ -13,8 +13,8 @@ jobs:
         shell: bash
         run: | 
         
-         SONAR_TOKEN="c42034e4a2279daf7810db9c7e07ef1a5b3335a6"
-         ORGANIZATION="lbf"
+         SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
+         ORGANIZATION=${{ vars.ORGANIZATION_NAME }}
          VISIBILITY="public"
          NEW_CODE_DEFINITION_TYPE="days"
          NEW_CODE_DEFINITION_VALUE="30"

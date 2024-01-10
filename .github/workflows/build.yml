@@ -24,7 +24,7 @@ jobs:
          NEW_CODE_DEFINITION_VALUE="previous_version"
         
          # List of project names and keys
-         PROJECTS=${{ inputs.project_names }}
+         PROJECTS=${{ vars.PROJECT_NAME }}
          # PROJECT_KEYS="${{ vars.PROJECT_NAME }}"
          echo  The tags are ${{ inputs.project_names }}
          for i in "${!PROJECTS[@]}"; do

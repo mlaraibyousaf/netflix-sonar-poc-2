@@ -10,21 +10,35 @@ jobs:
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
      
-      - name: create-sonar-project
-        uses: nelsoncanarinho/setup-sonar-action@v1.0.0
-        with:
-          SONAR_PROJECT_NAME: netflix-sonar-poc-2
-          SONAR_ORGANIZATION: mlaraibyousaf
-          # Name of the main branch of the project
-          SONAR_DEFAULT_BRANCH: main
-          # Sonar token used to integrate with SonarCloud api.
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          id: setupSonar
+      - name: script
+        shell: bash
+        run: | 
+        
+         SONAR_TOKEN="c42034e4a2279daf7810db9c7e07ef1a5b3335a6"
+         ORGANIZATION="mlaraibyousaf"
+         VISIBILITY="public"
+         NEW_CODE_DEFINITION_TYPE="days"
+         NEW_CODE_DEFINITION_VALUE="30"
+        
+         # List of project names and keys
+         PROJECTS=("test-react" "test-sonar" "test-go")
+         PROJECT_KEYS=("test-react-key" "test-sonar-key" "test-go-key")
+        
+         for i in "${!PROJECTS[@]}"; do
+             PROJECT_NAME="${PROJECTS[$i]}"
+             PROJECT_KEY="${PROJECT_KEYS[$i]}"
+        
+             curl --include \
+                  --request POST \
+                  -u "$SONAR_TOKEN:" \
+                  "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE&visibility=$VISIBILITY"
+         done
+            
           
                 
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

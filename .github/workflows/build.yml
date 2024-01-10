@@ -14,7 +14,7 @@ jobs:
         run: | 
         
          SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
-         ORGANIZATION=${{ vars.ORGANIZATION_NAME }}
+         ORGANIZATION=${{ vars.ORGANIZATION_KEY }}
          # VISIBILITY="private"
          NEW_CODE_DEFINITION_TYPE="previous_version"
          NEW_CODE_DEFINITION_VALUE="previous_version"

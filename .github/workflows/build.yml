@@ -23,12 +23,14 @@ jobs:
          NEW_CODE_DEFINITION_TYPE="previous_version"
          NEW_CODE_DEFINITION_VALUE="previous_version"
         
-         # List of project names and keys
-         # Convert the input string to an array
-         IFS=' ' read -r -a PROJECTS <<< "${{ inputs.project_names }}"
-         echo "The projects are: ${PROJECTS[@]}"
-         PROJECTS=${{ inputs.PROJECT_NAME }}
-         echo  The tags are ${{ inputs.project_names }}
+         INPUT_STRING="${{ inputs.project_names }}"
+         TRIMMED_STRING="$(echo -e "${INPUT_STRING}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+         IFS=' ' read -r -a PROJECTS <<< "$TRIMMED_STRING"
+         echo "Received projects: ${PROJECTS[*]}"
+         # IFS=' ' read -r -a PROJECTS <<< "${{ inputs.project_names }}"
+         # echo "The projects are: ${PROJECTS[@]}"
+         # PROJECTS=${{ inputs.PROJECT_NAME }}
+         # echo  The tags are ${{ inputs.project_names }}
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
              PROJECT_KEY="$ORGANIZATION"_"$PROJECT_NAME"

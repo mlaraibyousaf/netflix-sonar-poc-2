@@ -24,9 +24,10 @@ jobs:
          NEW_CODE_DEFINITION_VALUE="previous_version"
         
          # List of project names and keys
-         PROJECTS=${{ vars.PROJECT_NAME }}
+         # PROJECTS=${{ vars.PROJECT_NAME }}
+         readarray -t PROJECTS <<< $(jq -r '.[]' <<< '${{ github.event.inputs.project_names }}')
          # PROJECT_KEYS="${{ vars.PROJECT_NAME }}"
-        
+         echo $PROJECTS
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
              PROJECT_KEY="$ORGANIZATION"_"$PROJECT_NAME"

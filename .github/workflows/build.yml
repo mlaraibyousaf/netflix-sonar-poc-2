@@ -1,6 +1,10 @@
 name: sonar-project-workflow
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
+    inputs:
+      project_names:
+        description: 'JSON array of project names'
+        required: true
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest

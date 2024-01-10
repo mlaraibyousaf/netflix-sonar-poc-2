@@ -25,7 +25,7 @@ jobs:
         
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
-             PROJECT_KEY="$ORGANIZATION_$PROJECT_NAME"
+             PROJECT_KEY="${{ vars.ORGANIZATION_NAME }}_$PROJECT_NAME"
         
              curl --include \
                   --request POST \

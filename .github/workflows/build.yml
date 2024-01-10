@@ -13,17 +13,16 @@ jobs:
         shell: bash
         run: | 
         
-         SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
-         echo $SONAR_TOKEN
-         ORGANIZATION=${{ vars.ORGANIZATION_NAME }}
-         echo $ORGANIZATION
-         # VISIBILITY="public"
-         NEW_CODE_DEFINITION_TYPE="previous_version"
-         # NEW_CODE_DEFINITION_VALUE="previous_version"
+         SONAR_TOKEN="c42034e4a2279daf7810db9c7e07ef1a5b3335a6"
+         ORGANIZATION="lbf"
+         VISIBILITY="public"
+         NEW_CODE_DEFINITION_TYPE="days"
+         NEW_CODE_DEFINITION_VALUE="30"
         
          # List of project names and keys
          PROJECTS=("test-react12" "test-sonar12" "test-go12")
          PROJECT_KEYS=("test-react-key12" "test-sonar-key12" "test-go-key12")
+        
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"
              PROJECT_KEY="${PROJECT_KEYS[$i]}"
@@ -31,14 +30,5 @@ jobs:
              curl --include \
                   --request POST \
                   -u "$SONAR_TOKEN:" \
-                  "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE
+                  "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE&visibility=$VISIBILITY"
          done
-            
-          
-                
-
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

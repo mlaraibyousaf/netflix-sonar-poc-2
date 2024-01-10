@@ -29,12 +29,12 @@ jobs:
          echo  The projects are ${{ inputs.project_names }}
          PROJECTS=${{ inputs.PROJECT_NAME }}
          echo  The tags are ${{ inputs.project_names }}
-         # for i in "${!PROJECTS[@]}"; do
-         #     PROJECT_NAME="${PROJECTS[$i]}"
-         #     PROJECT_KEY="$ORGANIZATION"_"$PROJECT_NAME"
+         for i in "${!PROJECTS[@]}"; do
+             PROJECT_NAME="${PROJECTS[$i]}"
+             PROJECT_KEY="$ORGANIZATION"_"$PROJECT_NAME"
         
-         #     curl --include \
-         #          --request POST \
-         #          -u "$SONAR_TOKEN:" \
-         #          "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE"
-         # done
+             curl --include \
+                  --request POST \
+                  -u "$SONAR_TOKEN:" \
+                  "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE"
+         done

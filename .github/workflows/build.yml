@@ -21,7 +21,7 @@ jobs:
         
          # List of project names and keys
          PROJECTS=${{ vars.PROJECT_NAME }}
-         PROJECT_KEYS=("lbf_test1" "lbf_test2")
+         PROJECT_KEYS=${{ vars.PROJECT_KEYS }}
         
          for i in "${!PROJECTS[@]}"; do
              PROJECT_NAME="${PROJECTS[$i]}"

@@ -15,7 +15,7 @@ jobs:
         run: | 
         
          SONAR_TOKEN="c42034e4a2279daf7810db9c7e07ef1a5b3335a6"
-         ORGANIZATION="mlaraibyousaf"
+         ORGANIZATION="lbf"
          VISIBILITY="public"
          NEW_CODE_DEFINITION_TYPE="days"
          NEW_CODE_DEFINITION_VALUE="30"

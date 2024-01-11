@@ -35,4 +35,9 @@ jobs:
                   --request POST \
                   -u "$SONAR_TOKEN:" \
                   "https://sonarcloud.io/api/projects/create?organization=$ORGANIZATION&project=$PROJECT_KEY&name=$PROJECT_NAME&newCodeDefinitionType=$NEW_CODE_DEFINITION_TYPE&newCodeDefinitionValue=$NEW_CODE_DEFINITION_VALUE"
+             echo "Renaming main branch of $PROJECT_NAME to 'main'"
+             curl --include \
+                   --request POST \
+                   -u "$SONAR_TOKEN:" \
+                   "https://sonarcloud.io/api/project_branches/rename?project=$PROJECT_KEY&name=main"
          done
